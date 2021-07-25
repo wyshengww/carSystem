@@ -85,4 +85,21 @@ public class CarController {
         carService.insertCar(car);
         return JSONResult.ok();
     }
+
+    /**
+     * 购买车辆接口
+     */
+    @PostMapping("purchaseCar")
+    public JSONResult purchaseCar(Car car) {
+        carService.purchaseCar(car);
+        return JSONResult.ok();
+    }
+
+    @PostMapping("queryByCarName")
+    public JSONResult queryByCarName(Car car,@RequestParam String currentPage,@RequestParam String pageRows) {
+        //currentPage--当前页数  ,  pageRows----每页行数
+        int startIndex = (Integer.parseInt(currentPage) -1 ) * Integer.parseInt(pageRows) ;
+        List<Car> cars = carService.queryByCarName(car.getCarName(),startIndex,Integer.parseInt(pageRows));
+        return JSONResult.ok(cars);
+    }
 }

@@ -43,4 +43,18 @@ public class CarServiceImpl implements CarService {
     public void insertCar(Car car) {
         carDao.insertCar(car);
     }
+
+    @Override
+    public void purchaseCar(Car car) {
+        synchronized(CarServiceImpl.class) {
+            carDao.purchaseCar(car);
+        }
+    }
+
+    @Override
+    public List<Car> queryByCarName(String carName,int startIndex,int pageRows) {
+        return carDao.queryByCarName(carName,startIndex,pageRows);
+    }
+
+
 }
